@@ -513,7 +513,7 @@ namespace TMXTile
             tiledMap1.Backgroundcolor = map.GetBackgroundColor();
 
             foreach (var prop in map.Properties)
-                properties.Add(new TMXProperty() { Name = prop.Key, StringValue = prop.Value.ToString(), Type = GetPropertyType(prop.Value) });
+                properties.Add(new TMXProperty() { Name = prop.Key, Type = GetPropertyType(prop.Value), StringValue = prop.Value.ToString() });
 
             tiledMap1.Properties = GetOrdered(properties);
             tiledMap1.Tilesets = new List<TMXTileset>();
@@ -560,7 +560,7 @@ namespace TMXTile
                 {
                     foreach (KeyValuePair<string, PropertyValue> property in tileSheet.TileIndexProperties[i])
                     {
-                        var tmxProp = new TMXProperty() { Name = property.Key, StringValue = property.Value.ToString(), Type = GetPropertyType(property.Value) };
+                        var tmxProp = new TMXProperty() { Name = property.Key, Type = GetPropertyType(property.Value), StringValue = property.Value.ToString() };
                         var tile = tiledTileSet1.Tiles.FirstOrDefault(tiledTile => tiledTile.Id == i);
                         if (tile == null)
                         {
@@ -605,7 +605,7 @@ namespace TMXTile
                         else if (prop.Key == "@Opacity")
                             imageLayer.Opacity = prop.Value;
                         else
-                            imageProps.Add(new TMXProperty() { Name = prop.Key, StringValue = prop.Value.ToString(), Type = GetPropertyType(prop.Value) });
+                            imageProps.Add(new TMXProperty() { Name = prop.Key, Type = GetPropertyType(prop.Value), StringValue = prop.Value.ToString() });
                     }
                     imageLayer.Image = new TMXImage();
                     var imageTs = layer.GetTileSheetForImageLayer();
@@ -636,10 +636,10 @@ namespace TMXTile
                     else if (prop.Key == "@Opacity")
                         tiledLayer1.Opacity = prop.Value;
                     else
-                        props.Add(new TMXProperty() { Name = prop.Key, StringValue = prop.Value.ToString(), Type = GetPropertyType(prop.Value) });
+                        props.Add(new TMXProperty() { Name = prop.Key, Type = GetPropertyType(prop.Value), StringValue = prop.Value.ToString() });
                 }
                 if (layer.Description.Length > 0)
-                    props.Add(new TMXProperty() { Name = "@Description", StringValue = layer.Description, Type = "string" });
+                    props.Add(new TMXProperty() { Name = "@Description", Type = "string", StringValue = layer.Description });
 
                 List<int> intList = new List<int>();
                 for (int index1 = 0; index1 < layer.LayerHeight; ++index1)
@@ -716,7 +716,7 @@ namespace TMXTile
                             };
                             List<TMXProperty> props = new List<TMXProperty>();
                             foreach (KeyValuePair<string, PropertyValue> property in tile.Properties)
-                                props.Add(new TMXProperty() { Name = property.Key, StringValue = property.Value.ToString(), Type = GetPropertyType(property.Value) });
+                                props.Add(new TMXProperty() { Name = property.Key, Type = GetPropertyType(property.Value), StringValue = property.Value.ToString() });
                             tiledObject.Properties = props.ToArray();
                             tiledObjectGroup.Objects.Add(tiledObject);
                             ++tiledMap.Nextobjectid;

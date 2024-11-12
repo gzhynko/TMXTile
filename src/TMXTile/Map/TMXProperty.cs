@@ -12,7 +12,14 @@ namespace TMXTile
         public string Type { get; set; }
 
         [XmlAttribute(AttributeName = "value")]
-        public string StringValue { get; set; }
+        public string StringValue
+        {
+            get => StringValueInternal;
+            set => StringValueInternal = Type == "bool" ? value.ToLower() : value;
+        }
+
+        [XmlIgnore()]
+        internal string StringValueInternal { get; set; }
 
         [XmlIgnore()]
         public int IntValue
